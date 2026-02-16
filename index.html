@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raíces Vivas - Preservando Saberes Ancestrales</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Raíces Vivas Logo" class="logo-image">
+                <span class="logo-text">Raíces Vivas</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#cursos">Cursos</a></li>
+                <li><a href="#portadores">Portadores</a></li>
+                <li><a href="#comunidad">Comunidad</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-secondary" id="btnLogin">Ingresar</button>
+                <button class="btn-primary" id="btnRegister">Registrarse</button>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Iniciar Sesión</h2>
+                <span class="close" data-modal="loginModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Correo Electrónico</label>
+                        <input type="email" id="loginEmail" name="email" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña</label>
+                        <input type="password" id="loginPassword" name="password" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="remember">
+                            <span>Recordarme</span>
+                        </label>
+                        <a href="#" class="link-text">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Ingresar</button>
+                    <div class="form-divider">
+                        <span>O continúa con</span>
+                    </div>
+                    <div class="social-login">
+                        <button type="button" class="btn-social btn-google">
+                            <span class="social-icon">G</span>
+                            Google
+                        </button>
+                        <button type="button" class="btn-social btn-facebook">
+                            <span class="social-icon">f</span>
+                            Facebook
+                        </button>
+                    </div>
+                    <p class="form-footer">
+                        ¿No tienes cuenta? <a href="#" class="link-text" id="switchToRegister">Regístrate aquí</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Crear Cuenta</h2>
+                <span class="close" data-modal="registerModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerName">Nombre Completo</label>
+                        <input type="text" id="registerName" name="name" placeholder="Tu nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Correo Electrónico</label>
+                        <input type="email" id="registerEmail" name="email" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña</label>
+                        <input type="password" id="registerPassword" name="password" placeholder="Mínimo 8 caracteres" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Contraseña</label>
+                        <input type="password" id="registerConfirmPassword" name="confirmPassword" placeholder="Repite tu contraseña" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userType">Tipo de Usuario</label>
+                        <select id="userType" name="userType" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="aprendiz">Aprendiz - Quiero aprender saberes ancestrales</option>
+                            <option value="portador">Portador - Quiero compartir mis conocimientos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="terms" required>
+                            <span>Acepto los <a href="#" class="link-text">términos y condiciones</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Crear Cuenta</button>
+                    <div class="form-divider">
+                        <span>O regístrate con</span>
+                    </div>
+                    <div class="social-login">
+                        <button type="button" class="btn-social btn-google">
+                            <span class="social-icon">G</span>
+                            Google
+                        </button>
+                        <button type="button" class="btn-social btn-facebook">
+                            <span class="social-icon">f</span>
+                            Facebook
+                        </button>
+                    </div>
+                    <p class="form-footer">
+                        ¿Ya tienes cuenta? <a href="#" class="link-text" id="switchToLogin">Inicia sesión aquí</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Éxito -->
+    <div id="successModal" class="modal">
+        <div class="modal-content modal-success">
+            <div class="success-icon">✓</div>
+            <h2 id="successTitle">¡Bienvenido!</h2>
+            <p id="successMessage">Has iniciado sesión correctamente</p>
+            <button class="btn-primary" id="closeSuccess">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Preservando los Saberes Ancestrales del Perú</h1>
+                    <p class="hero-subtitle">Conecta con portadores de conocimientos tradicionales y aprende oficios, recetas y técnicas transmitidas por generaciones</p>
+                    <div class="hero-actions">
+                        <button class="btn-primary-large">Explorar Cursos</button>
+                        <button class="btn-outline-large">Conviértete en Portador</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Saberes Documentados</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Portadores Activos</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-label">Aprendices</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Imagen Hero -->
+                <div class="hero-image">
+                    <img src="landing.png" alt="Raíces Vivas en dispositivos móviles" class="hero-mockup">
+                    <!-- Decoración de fondo -->
+                    <div class="hero-decoration decoration-1"></div>
+                    <div class="hero-decoration decoration-2"></div>
+                    <div class="hero-decoration decoration-3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-pattern"></div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Explora por Categoría</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">⚑</div>
+                    <h3>Gastronomía Tradicional</h3>
+                    <p>Recetas ancestrales transmitidas por generaciones</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">✦</div>
+                    <h3>Artesanía</h3>
+                    <p>Técnicas tradicionales de tejido y cerámica</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">♪</div>
+                    <h3>Música y Danzas</h3>
+                    <p>Expresiones culturales y ritmos ancestrales</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">✿</div>
+                    <h3>Medicina Tradicional</h3>
+                    <p>Conocimientos ancestrales de plantas medicinales</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">◈</div>
+                    <h3>Lenguas Originarias</h3>
+                    <p>Preservación de idiomas ancestrales</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">◉</div>
+                    <h3>Oficios Tradicionales</h3>
+                    <p>Técnicas y saberes de construcción ancestral</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos Destacados -->
+    <section class="courses" id="cursos">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cursos Destacados</h2>
+                <div class="filter-tabs">
+                    <button class="tab active">Todos</button>
+                    <button class="tab">Gastronomía</button>
+                    <button class="tab">Artesanía</button>
+                    <button class="tab">Música</button>
+                </div>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500') center/cover;">
+                        <span class="course-badge">Popular</span>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-category">Gastronomía</span>
+                        <h3>Curso: Pachamanca Tradicional</h3>
+                        <p class="course-instructor">Comadre Máxima</p>
+                        <div class="course-meta">
+                            <span>◷ 12 videos</span>
+                            <span>◐ Nivel básico</span>
+                        </div>
+                        <button class="btn-course">Ver Curso</button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=500') center/cover;">
+                        <span class="course-badge">Nuevo</span>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-category">Artesanía</span>
+                        <h3>Curso: Textilería Andina</h3>
+                        <p class="course-instructor">Maestro Paulino</p>
+                        <div class="course-meta">
+                            <span>◷ 8 videos</span>
+                            <span>◐ Nivel intermedio</span>
+                        </div>
+                        <button class="btn-course">Ver Curso</button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500') center/cover;">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-category">Música</span>
+                        <h3>Curso: Música Ancestral</h3>
+                        <p class="course-instructor">Don Eusebio</p>
+                        <div class="course-meta">
+                            <span>◷ 10 videos</span>
+                            <span>◐ Nivel básico</span>
+                        </div>
+                        <button class="btn-course">Ver Curso</button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1509390144173-0754e3dc3e6f?w=500') center/cover;">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-category">Medicina</span>
+                        <h3>Curso: Medicina Ancestral</h3>
+                        <p class="course-instructor">Doña Carmen</p>
+                        <div class="course-meta">
+                            <span>◷ 15 videos</span>
+                            <span>◐ Nivel avanzado</span>
+                        </div>
+                        <button class="btn-course">Ver Curso</button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1587334207-81f18f98cb93?w=500') center/cover;">
+                        <span class="course-badge">Popular</span>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-category">Gastronomía</span>
+                        <h3>Curso: Haciendo Cocina</h3>
+                        <p class="course-instructor">Doña Rosa</p>
+                        <div class="course-meta">
+                            <span>◷ 6 videos</span>
+                            <span>◐ Nivel básico</span>
+                        </div>
+                        <button class="btn-course">Ver Curso</button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1524419986249-348e8fa6ad4a?w=500') center/cover;">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-category">Artesanía</span>
+                        <h3>Curso: Cerámica Tradicional</h3>
+                        <p class="course-instructor">Maestro Miguel</p>
+                        <div class="course-meta">
+                            <span>◷ 9 videos</span>
+                            <span>◐ Nivel intermedio</span>
+                        </div>
+                        <button class="btn-course">Ver Curso</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cómo Funciona -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Cómo Funciona</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>Regístrate</h3>
+                    <p>Crea tu perfil como aprendiz o portador de saberes en minutos</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>Explora</h3>
+                    <p>Descubre cursos y maestros organizados por categoría cultural</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>Conecta</h3>
+                    <p>Solicita conexión directa con portadores de conocimiento</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <h3>Aprende</h3>
+                    <p>Accede a microvideos educativos y experiencias interactivas</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">05</div>
+                    <h3>Documenta</h3>
+                    <p>Graba y comparte tu experiencia de aprendizaje</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">06</div>
+                    <h3>Comparte</h3>
+                    <p>Interactúa con la comunidad y difunde saberes ancestrales</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portadores Destacados -->
+    <section class="portadores" id="portadores">
+        <div class="container">
+            <h2 class="section-title">Portadores de Saberes</h2>
+            <p class="section-subtitle">Maestros y maestras que comparten su conocimiento ancestral</p>
+            <div class="portadores-grid">
+                <div class="portador-card">
+                    <div class="portador-image" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1571844307880-751c6d86f3f3?w=400') center/cover;"></div>
+                    <h4>Comadre Máxima</h4>
+                    <p class="portador-specialty">Gastronomía Ancestral</p>
+                    <p class="portador-location">Cusco, Perú</p>
+                    <span class="portador-courses">18 cursos</span>
+                </div>
+                <div class="portador-card">
+                    <div class="portador-image" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400') center/cover;"></div>
+                    <h4>Maestro Paulino</h4>
+                    <p class="portador-specialty">Textilería Andina</p>
+                    <p class="portador-location">Puno, Perú</p>
+                    <span class="portador-courses">12 cursos</span>
+                </div>
+                <div class="portador-card">
+                    <div class="portador-image" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=400') center/cover;"></div>
+                    <h4>Doña Carmen</h4>
+                    <p class="portador-specialty">Medicina Tradicional</p>
+                    <p class="portador-location">Ayacucho, Perú</p>
+                    <span class="portador-courses">15 cursos</span>
+                </div>
+                <div class="portador-card">
+                    <div class="portador-image" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1569098644584-210bcd375b59?w=400') center/cover;"></div>
+                    <h4>Don Eusebio</h4>
+                    <p class="portador-specialty">Música Ancestral</p>
+                    <p class="portador-location">Huancayo, Perú</p>
+                    <span class="portador-courses">10 cursos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Preserva y Comparte los Saberes de tu Comunidad</h2>
+                <p>Únete a nuestra red de portadores y aprendices comprometidos con mantener viva la cultura ancestral del Perú</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary-large">Comenzar Ahora</button>
+                    <button class="btn-outline-large-white">Conocer Más</button>
+                </div>
+            </div>
+        </div>
+        <div class="cta-pattern"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="Raíces Vivas" class="footer-logo-image">
+                        <span class="logo-text">Raíces Vivas</span>
+                    </div>
+                    <p>Preservando y difundiendo los saberes ancestrales del Perú mediante tecnología e innovación</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">yt</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Explora</h4>
+                    <ul>
+                        <li><a href="#cursos">Cursos</a></li>
+                        <li><a href="#portadores">Portadores</a></li>
+                        <li><a href="#comunidad">Comunidad</a></li>
+                        <li><a href="#categorias">Categorías</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Términos de Uso</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>contacto@raicesvivas.pe</li>
+                        <li>+51 987 654 321</li>
+                        <li>Lima, Perú</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Raíces Vivas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
